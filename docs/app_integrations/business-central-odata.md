@@ -187,7 +187,7 @@ Here is a list of the available actions for Business Central oData Rest:
 
 > **Ship To Address Actions**
 
-- **Get customer ship to address** - Create a new item journal entry record.
+- **Get customer ship to address** - Retrieve existing ship-to address records for a customer.
 - **Create customer ship to address** - Create a new shipping address record for a customer.
 
 > **Item Ledger Entry Actions**
