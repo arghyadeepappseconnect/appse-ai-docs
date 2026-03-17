@@ -127,11 +127,10 @@ When running in **"Run for Each Item"** mode, you can still access the entire ar
 
 <img src="\img\platform\key-concepts\nodes\built-in\code\descendants.png" alt="Code Node Previous Node" width="700"/>
 
-Access output from any previous node by name. In the figure above, **SAP Business One** is the node name.
+Access output from any previous node by name regardless of the mode. In the figure above, **SAP Business One** is the node name.
 
 *   **Syntax**: `$('Node Name').all()`
-*   The `$('Node Name')` function returns a wrapper object with the node's properties.
-*   In "Run for Each Item" mode, use `$('Node Name').all()` to retrieve the *entire array* of outputs from that specific node, instead of just the corresponding single item.
+*   Use `$('Node Name').all()` to retrieve the *entire array* of outputs from that specific node, instead of just the corresponding single item.
 
 **Example:**
 ```javascript
