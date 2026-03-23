@@ -57,19 +57,19 @@ Built-in functions for common data manipulation tasks in APPSeAI expressions.
 
 ## String Functions
 
-| Function            | Expression                                     | Output                      | Use Case                   |
-| ------------------- | ---------------------------------------------- | --------------------------- | -------------------------- |
-| `upper()`           | `{{ upper($payload.customerName) }}`           | `"ALICE JOHNSON"`           | Uppercase                  |
-| `lower()`           | `{{ lower($payload.orderId) }}`                | `"ord-001"`                 | Lowercase                  |
-| `join()`            | `{{ join(', ', $payload.items[*].name) }}`     | `"Laptop, Mouse, Keyboard"` | Concat array               |
-| `contains()`        | `{{ contains($payload.orderId, 'ORD') }}`      | `true`                      | Check substring            |
-| `starts_with()`     | `{{ starts_with($payload.orderId, 'ORD') }}`   | `true`                      | Check prefix               |
-| `ends_with()`       | `{{ ends_with($payload.orderId, '001') }}`     | `true`                      | Check suffix               |
-| `substringBefore()` | `{{ substringBefore($payload.orderId, '-') }}` | `"ORD"`                     | Substring before delimiter |
-| `substringAfter()`  | `{{ substringAfter($payload.orderId, '-') }}`  | `"001"`                     | Substring after delimiter  |
-| `split()`           | `{{ split($payload.orderId, '-') }}`           | `["ORD","001"]`             | Split string               |
-| `substring(string, startIndex, length)` | ```{{ substring($payload.customerName, `0`, `5`) }}```  | `"alice"`  | Substring Extract  |
-| `substring(string, startIndex)` | ```{{ substring($payload.orderId, `4`) }}```  | `"001"`  | Substring Extract  |
+| Function                                | Expression                                           | Output                      | Use Case                   |
+| --------------------------------------- | ---------------------------------------------------- | --------------------------- | -------------------------- |
+| `upper()`                               | `{{ upper($payload.customerName) }}`                 | `"ALICE JOHNSON"`           | Uppercase                  |
+| `lower()`                               | `{{ lower($payload.orderId) }}`                      | `"ord-001"`                 | Lowercase                  |
+| `join()`                                | `{{ join(', ', $payload.items[*].name) }}`           | `"Laptop, Mouse, Keyboard"` | Concat array               |
+| `contains()`                            | `{{ contains($payload.orderId, 'ORD') }}`            | `true`                      | Check substring            |
+| `starts_with()`                         | `{{ starts_with($payload.orderId, 'ORD') }}`         | `true`                      | Check prefix               |
+| `ends_with()`                           | `{{ ends_with($payload.orderId, '001') }}`           | `true`                      | Check suffix               |
+| `substringBefore()`                     | `{{ substringBefore($payload.orderId, '-') }}`       | `"ORD"`                     | Substring before delimiter |
+| `substringAfter()`                      | `{{ substringAfter($payload.orderId, '-') }}`        | `"001"`                     | Substring after delimiter  |
+| `split()`                               | `{{ split($payload.orderId, '-') }}`                 | `["ORD","001"]`             | Split string               |
+| `substring(string, startIndex, length)` | ``{{ substring($payload.customerName, `0`, `5`) }}`` | `"alice"`                   | Substring Extract          |
+| `substring(string, startIndex)`         | ``{{ substring($payload.orderId, `4`) }}``           | `"001"`                     | Substring Extract          |
 
 ## Type Functions
 
@@ -84,22 +84,33 @@ Built-in functions for common data manipulation tasks in APPSeAI expressions.
 
 **Sample Payload (Relevant Fields Only)**
 
+**_Scenario 1_**
+
 ```JSON
 "created_at": "2026-01-14 12:05:20",
-"updated_at": "2026-02-01 12:31:27"
+"updated_at": "2026-02-01 12:31:27",
 ```
 
-| Function               | Expression                                      | Output                         | Use Case                                  |
-| ---------------------- | ----------------------------------------------- | ------------------------------ | ----------------------------------------- |
-| `now()`                | `{{ now() }}`                                   | `2026-01-16T07:29:05.5390268Z` | Get current execution timestamp           |
-| `get_unix_timestamp()` | `{{ get_unix_timestamp($payload.created_at) }}` | `1768392320000`                | Convert datetime field to Unix epoch (ms) |
-| `formatDate()`  |  `{{ formatDate($payload.updated_at, 'yyyy-MM-ddTHH:mm:ssZ') }}`  | `"2026-02-01T12:31:27Z"`  |  Date Formatter  |
-| `date_diff()` | `{{ date_diff($payload.updated_at, $payload.created_at, 'days') }}` | `18` | Return difference in days |
-| `date_diff()` | `{{ date_diff($payload.updated_at, $payload.created_at, 'hours') }}` | `432.4352777777778` | Return difference in hours |
-| `date_diff()` | `{{ date_diff($payload.updated_at, $payload.created_at, 'minutes') }}` | `25946.116666666665` | Return difference in minutes |
-| `date_diff()` | `{{ date_diff($payload.updated_at, $payload.created_at, 'seconds') }}` | `1556767` | Return difference in seconds |
-| `date_diff()` | `{{ date_diff($payload.updated_at, $payload.created_at, 'milliseconds') }}` | `1556767000` | Return difference in milliseconds |
+**_Scenario 2_**
 
+```JSON
+"created_At": "2025-01-04T14:30:00"
+```
+
+| Function               | Expression                                                                  | Output                         | Use Case                                  |
+| ---------------------- | --------------------------------------------------------------------------- | ------------------------------ | ----------------------------------------- |
+| `now()`                | `{{ now() }}`                                                               | `2026-01-16T07:29:05.5390268Z` | Get current execution timestamp           |
+| `get_unix_timestamp()` | `{{ get_unix_timestamp($payload.created_at) }}`                             | `1768392320000`                | Convert datetime field to Unix epoch (ms) |
+| `formatDate()`         | `{{ formatDate($payload.updated_at, 'yyyy-MM-ddTHH:mm:ssZ') }}`             | `"2026-02-01T12:31:27Z"`       | Date Formatter                            |
+| `date_diff()`          | `{{ date_diff($payload.updated_at, $payload.created_at, 'days') }}`         | `18`                           | Return difference in days                 |
+| `date_diff()`          | `{{ date_diff($payload.updated_at, $payload.created_at, 'hours') }}`        | `432.4352777777778`            | Return difference in hours                |
+| `date_diff()`          | `{{ date_diff($payload.updated_at, $payload.created_at, 'minutes') }}`      | `25946.116666666665`           | Return difference in minutes              |
+| `date_diff()`          | `{{ date_diff($payload.updated_at, $payload.created_at, 'seconds') }}`      | `1556767`                      | Return difference in seconds              |
+| `date_diff()`          | `{{ date_diff($payload.updated_at, $payload.created_at, 'milliseconds') }}` | `1556767000`                   | Return difference in milliseconds         |
+| `date_add_days()`      | `{{ date_add_days($payload.created_At, `5`) }}`                             | `2025-01-09T14:30:00`          | Add days to payload date                  |
+| `date_add_days()`      | `{{ date_add_days($payload.created_At, `-3`) }}`                            | `2025-01-01T14:30:00`          | Subtract days from payload date           |
+| `date_add_days()`      | `{{ date_add_days(now(), `7`) }}`                                           | `2026-03-26T...Z`              | Add days to current UTC time              |
+| `date_add_days()`      | `{{ date_add_days(now(), `-10`) }}`                                         | `2026-03-09T...Z`              | Subtract days from current UTC time       |
 
 ## Utility Functions
 
@@ -112,12 +123,45 @@ Built-in functions for common data manipulation tasks in APPSeAI expressions.
 
 ## Math Functions
 
-| Function  | Expression            | Output | Use Case       |
-| --------- | --------------------- | ------ | -------------- |
-| `abs()`   | `{{ abs(`-10`) }}`    | `10`   | Absolute value |
-| `ceil()`  | `{{ ceil(`10.3`) }}`  | `11`   | Round up       |
-| `floor()` | `{{ floor(`10.9`) }}` | `10`   | Round down     |
-| `round()` | `{{ round(`10.5`) }}` | `11`   | Round nearest  |
+**Sample Payload**
+
+```JSON
+{
+ "price": 200,
+"quantity": 5,
+"discount": 10,
+ "tax": 3,
+ "items": [
+   { "amount": 10 },
+   { "amount": 20.5 },
+   { "amount": 4.5 }
+ ]
+}
+```
+
+| Function        | Expression                                            | Output               | Use Case                          |
+| --------------- | ----------------------------------------------------- | -------------------- | --------------------------------- |
+| `abs()`         | `{{ abs(`-10`) }}`                                    | `10`                 | Absolute value                    |
+| `ceil()`        | `{{ ceil(`10.3`) }}`                                  | `11`                 | Round up                          |
+| `floor()`       | `{{ floor(`10.9`) }}`                                 | `10`                 | Round down                        |
+| `round()`       | `{{ round(`10.5`) }}`                                 | `11`                 | Round nearest                     |
+| `add()`         | `{{ add($payload.price, `50`) }}`                     | `250`                | Add static value to payload field |
+| `add()`         | `{{ add($payload.price, $payload.tax) }}`             | `203`                | Add two payload fields            |
+| `subtract()`    | `{{ subtract($payload.price, `30`) }}`                | `170`                | Subtract static value             |
+| `subtract()`    | `{{ subtract($payload.price, $payload.discount) }}`   | `190`                | Subtract one field from another   |
+| `multiply()`    | `{{ multiply($payload.price, `3`) }}`                 | `600`                | Multiply with static value        |
+| `multiply()`    | `{{ multiply($payload.price, $payload.quantity) }}`   | `1000`               | Multiply two fields               |
+| `divide()`      | `{{ divide($payload.price, `4`) }}`                   | `50`                 | Divide by static value            |
+| `divide()`      | `{{ divide($payload.price, $payload.quantity) }}`     | `40`                 | Divide two fields                 |
+| `mod()`         | `{{ mod($payload.price, `3`) }}`                      | `2`                  | Modulus with static value         |
+| `mod()`         | `{{ mod($payload.price, $payload.tax) }}`             | `2`                  | Modulus of two fields             |
+| `percentage()`  | `{{ percentage($payload.price, `10`) }}`              | `20`                 | Calculate percentage              |
+| `percentage()`  | `{{ percentage($payload.price, $payload.discount) }}` | `20`                 | Percentage using field            |
+| `power()`       | `{{ power($payload.quantity, `2`) }}`                 | `25`                 | Exponentiation                    |
+| `power()`       | `{{ power($payload.quantity, $payload.tax) }}`        | `125`                | Raise to another field            |
+| `square_root()` | `{{ square_root($payload.price) }}`                   | `14.142135623730951` | Square root of payload field      |
+| `square_root()` | `{{ square_root(`9`) }}`                              | `3`                  | Square root of static value       |
+| `sumbyfield()`  | `{{ sumbyfield($payload.items, 'amount') }}`          | `35`                 | Sum a field across array items    |
 
 ## Real-World Examples
 
@@ -229,7 +273,7 @@ Built-in functions for common data manipulation tasks in APPSeAI expressions.
 {
   "orderCreatedAtEpoch": "{{ get_unix_timestamp($payload.created_at) }}",
   "currentTime": "{{ now() }}",
-  "isOrderPast": "{{ get_unix_timestamp($payload.created_at) < get_unix_timestamp(now()) }}"
+  "isOrderPast": "{{ get_unix_timestamp($payload.created_at) < get_unix_timestamp(now()) }}",
   "created_at": "{{ get_date_only($payload.updated_at) }}",
   "created_at": "{{ get_time_only($payload.updated_at) }}",
   "updatedAt": "{{ formatDate($payload.updated_at, 'yyyy-MM-ddTHH:mm:ssZ') }}",
