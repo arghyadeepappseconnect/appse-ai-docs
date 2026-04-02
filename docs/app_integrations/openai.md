@@ -55,13 +55,15 @@ Once you get your API secret key, paste it in appse ai’s credential form. And 
 Make sure you save your **API secret key** somewhere safe, as you **won’t be able to see it again**.
 
 :::
-# Response Format — Custom Schema Builder
+---
+
+## Response Format
 
 The **Response Format** option allows you to define the exact structure of the AI's output. Instead of receiving a plain text response, the model returns a structured JSON object that conforms precisely to the schema you provide.
 
----
 
-## Supported Types
+
+### Supported Types
 
 The following data types are supported when defining schema fields.
 
@@ -78,9 +80,9 @@ The following data types are supported when defining schema fields.
 
 > **Note:** `anyOf` is supported on individual fields only. The **root-level object of a schema cannot use `anyOf`** as its type.
 
----
 
-## Keyword Reference
+
+### Keyword Reference
 
 The following keywords are used to construct a valid schema.
 
@@ -95,13 +97,13 @@ The following keywords are used to construct a valid schema.
 | `strict: true` | Enforces exact compliance with the defined schema | Always set to `true`, nested inside `json_schema` |
 | `name` | A unique identifier for your schema | Use underscores instead of spaces, nested inside `json_schema` |
 
----
 
-## Additional Constraints
+
+### Additional Constraints
 
 Beyond the `type` declaration, the following optional constraints allow you to enforce specific rules on field values.
 
-### String Constraints
+#### String Constraints
 
 | Property | Description | Example |
 |---|---|---|
@@ -139,7 +141,7 @@ Beyond the `type` declaration, the following optional constraints allow you to e
 | `minItems` | The array must contain at least this many items | `"minItems": 1` |
 | `maxItems` | The array must contain no more than this many items | `"maxItems": 50` |
 
----
+
 
 ## Building a Schema — Step by Step
 
@@ -188,7 +190,7 @@ Following the same structure, the steps below build a complete product list sche
 
 **Objective:** Define a schema that returns a list of products, where each product contains the fields: `id`, `name`, `sku`, `price`, `currency`, `status`, and `created_at`.
 
----
+
 
 ### Step 1 — Start with the base wrapper
 
@@ -209,7 +211,7 @@ Every schema begins with the same outer structure. The `name`, `strict`, and `sc
 
 > Set `name` to a meaningful label for your schema. Use underscores in place of spaces.
 
----
+
 
 ### Step 2 — Define the top-level structure
 
@@ -228,7 +230,7 @@ The root of every schema must be an `object`. Inside its `properties`, declare t
 }
 ```
 
----
+
 
 ### Step 3 — Define `products` as an array
 
@@ -243,7 +245,7 @@ Since `products` is a list of multiple items, its type is `array`. The `items` p
 }
 ```
 
----
+
 
 ### Step 4 — Describe a single product
 
@@ -282,7 +284,7 @@ Each product is an `object` containing several fields. The appropriate type is a
 }
 ```
 
----
+
 
 ### Step 5 — Complete Schema
 
@@ -328,7 +330,7 @@ The following is the final, assembled schema incorporating all steps above.
 }
 ```
 
----
+
 
 ## JSON Mode
 
@@ -344,7 +346,7 @@ Set `text.format` to the following:
 
 > **Note:** JSON Mode guarantees that the output is valid JSON, but does not enforce any specific field structure. Use a full schema when consistent field names and types are required.
 
----
+
 
 ## Schema Validation Rules
 
